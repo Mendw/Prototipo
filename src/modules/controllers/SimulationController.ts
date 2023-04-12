@@ -36,7 +36,7 @@ export default class SimulationController {
     private scale: number;
     private readonly minDrag = 4;
 
-    private simulationSpeed: number;
+    private simulationSpeed!: number;
 
     private menuActionClassNames: Map<string, string>;
 
@@ -80,10 +80,10 @@ export default class SimulationController {
 
         this.offset = Vector.zero;
         this.scale = 1;
-        this.simulationSpeed = 0;
-
+        
         this.trajectoryLength = 0;
         
+        this.pauseSimulation();
         this.updateSize();
         this.addListeners();
     }
@@ -158,22 +158,29 @@ export default class SimulationController {
 
     pauseSimulation() {
         this.simulationSpeed = 0;
+        this.menuController.setDisplaySpeed('En Pausa', true);
     }
 
     simulationSlow() {
         this.simulationSpeed = 0.5;
+        this.menuController.setDisplaySpeed('Velocidad x0.5');
+
         if (!this.isAnimating) this.requestFrame();
     }
 
 
     simulationNormal() {
         this.simulationSpeed = 1.0;
+        this.menuController.setDisplaySpeed('Velocidad x1.0');
+
         if (!this.isAnimating) this.requestFrame();
     }
 
 
     simulationFast() {
         this.simulationSpeed = 2.0;
+        this.menuController.setDisplaySpeed('Velocidad x2.0');
+
         if (!this.isAnimating) this.requestFrame();
     }
 

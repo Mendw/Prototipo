@@ -8,6 +8,7 @@ export default class MenuController {
     }
 
     private submenus: Map<string, HTMLElement>;
+    private speedDisplay: HTMLElement;
     
     private parent: SimulationController;
     private container: HTMLElement;
@@ -20,6 +21,10 @@ export default class MenuController {
         this.parent = parent;
         this.container = container;
         this.submenus = new Map();
+
+        this.speedDisplay = document.createElement('div');
+        this.speedDisplay.classList.add('speed-display');
+        this.container.appendChild(this.speedDisplay);
 
         this.parseMenu(config)
             .forEach(submenu => this.container.appendChild(submenu));
@@ -79,5 +84,14 @@ export default class MenuController {
         optionElement.innerText = option.title;
 
         return optionElement;
+    }
+
+    setDisplaySpeed(innerText: string, isPaused: boolean = false) {
+        this.speedDisplay.innerText = innerText;
+        if (isPaused) {
+            this.speedDisplay.classList.add('paused');
+        } else {
+            this.speedDisplay.classList.remove('paused');
+        }
     }
 }

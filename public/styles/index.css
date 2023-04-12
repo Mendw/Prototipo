@@ -31,6 +31,7 @@ body {
 }
 
 #simulation-menu {
+    user-select: none;
     grid-area: menu;
 
     border-bottom: 1px solid black;
@@ -38,7 +39,21 @@ body {
     flex-direction: row;
 
     align-items: end;
-    padding-left: 20px;
+}
+
+.speed-display {
+    width: 100px;
+    
+    display: grid;
+    place-content: center;
+    align-self: stretch;
+
+    border-right: 1px solid black;
+    padding: 5px 10px 0px 15px;
+}
+
+.speed-display.paused {
+    background-color: #ffdeac;
 }
 
 .main_menu {
@@ -95,6 +110,7 @@ body {
 .level-select-container {
     padding: 5px;
     grid-area: 'level-select';
+    user-select: none;
     
     display: flex;
     flex-direction: row;
@@ -139,6 +155,7 @@ body {
 
 #messages-container>.no-messages {
     color: gray;
+    user-select: none;
 
     flex: 1;
     display: grid;
@@ -178,6 +195,7 @@ body {
 #suggestions-box {
     grid-area: suggestions;
     border-bottom: 1px solid black;
+    user-select: none;
 
     display: flex;
     flex-direction: column;
