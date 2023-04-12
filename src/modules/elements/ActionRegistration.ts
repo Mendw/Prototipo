@@ -63,7 +63,9 @@ export default class ActionRegistration extends BaseComponent<ActionRegistration
     initialize() {
         this.actions.set('register', this.registerAction);
         this.actions.set('checkPrerequisites', this.checkPrerequisites);
-        this.actions.set('undo', this.undo);
+        this.actions.set('undoAction', this.undoAction);
+
+        this.UIActions.set('initialize', this.generateInitialSuggestion);
     }
 
     getInitialState(): ActionRegistrationState {
@@ -141,7 +143,7 @@ export default class ActionRegistration extends BaseComponent<ActionRegistration
         message.respond({ response });
     }
 
-    async undo(message: Message) {
+    async undoAction(message: Message) {
         await this.addProcess(500, 1000);
 
         const { className } = message.content.payload as UndoMessagePayload;
@@ -166,6 +168,14 @@ export default class ActionRegistration extends BaseComponent<ActionRegistration
         this.sendMessage('IntelligentAgent', {
             action: 'processAction',
             payload: { state: this.state, action: 'undo' }
+        });
+    }
+
+    async generateInitialSuggestion() {
+        await this.addProcess(500, 1000);
+        this.sendMessage('IntelligentAgent', {
+            action: 'processAction',
+            payload: { state: this.state, action: 'initialize' }
         });
     }
 

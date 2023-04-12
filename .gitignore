@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# the scripts folder inside the public folder
+public/scripts
+
+# package-lock.json (https://docs.npmjs.com/files/package-lock.json)
+package-lock.json

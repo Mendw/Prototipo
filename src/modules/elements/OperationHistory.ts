@@ -48,7 +48,7 @@ export default class OperationHistory extends BaseComponent<OperationHistoryStat
         
         await this.addProcess(1000, 1500);
         this.sendMessage('ActionRegistration', {
-            action: 'undo',
+            action: 'undoAction',
             payload: operation
         });
 

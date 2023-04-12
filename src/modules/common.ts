@@ -339,6 +339,7 @@ export abstract class BaseComponent<T extends object = object> extends BaseEleme
 
     protected status: ComponentStatus;
     protected state: T;
+    protected isClicked: boolean;
 
     protected gearRotation: number;
 
@@ -353,6 +354,7 @@ export abstract class BaseComponent<T extends object = object> extends BaseEleme
         
         this.state = this.getInitialState();
         this.status = this.getStatus();
+        this.isClicked = false;
 
         this.processes = [];
         this.parallelism = parallelism;
@@ -515,7 +517,6 @@ export abstract class BaseComponent<T extends object = object> extends BaseEleme
         await this.addProcess(300, 500);
 
         if (this.prevStates.length === 0) {
-            console.log('No hay más estados anteriores');
             const state = this.getInitialState();
             this.setState(state, false);
         } else {
@@ -656,8 +657,12 @@ export abstract class BaseKDDComponent<T extends object> extends BaseComponent<T
     }
 
     async logState() {
+        if (this.isClicked) return;
+        this.isClicked = true;
+
         await this.addProcess(300, 400);
         ConsoleController.log(this.describeState(), 'DEBUG');
+        this.isClicked = false;
     }
 
     abstract describeState(): string;

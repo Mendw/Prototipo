@@ -76,10 +76,11 @@ export default class SimulationController {
         this.initializeElements(elements);
         this.initializeConnectors(connectors);
         this.initializeMenuActions(menu);
+        this.initializeSuggestion();
 
         this.offset = Vector.zero;
         this.scale = 1;
-        this.simulationSpeed = 1;
+        this.simulationSpeed = 0;
 
         this.trajectoryLength = 0;
         
@@ -146,6 +147,13 @@ export default class SimulationController {
 
         this.UIActions.set('acceptSuggestion', this.acceptSuggestion);
         this.UIActions.set('rejectSuggestion', this.rejectSuggestion);
+    }
+
+    initializeSuggestion() {
+        const ActionRegistrationComponent = this.elements.get('ActionRegistration');
+        if (ActionRegistrationComponent !== undefined) {
+            ActionRegistrationComponent.UITrigger('initialize')
+        }
     }
 
     pauseSimulation() {

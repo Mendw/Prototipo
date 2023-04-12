@@ -108,4 +108,41 @@ export default class IntelligentAgent extends BaseComponent<IntelligentAgentStat
     getStatus(): ComponentStatus {
         return 'READY';
     }
+
+    click() {
+        this.logState();
+        return true;
+    }
+
+    async logState() {
+        if (this.isClicked) return;
+        this.isClicked = true;
+
+        let acceptedAmmount = 0;
+        let rejectedAmmount = 0;
+        let ignoredAmmount = 0;
+
+        this.state.userFeedback.forEach(feedback => {
+            switch (feedback.response) {
+                case 'ACCEPTED':
+                    acceptedAmmount++;
+                    break;
+                case 'REJECTED':
+                    rejectedAmmount++;
+                    break;
+                case 'IGNORED':
+                    ignoredAmmount++;
+                    break;
+            }
+        });
+        
+        await this.addProcess(500, 700);
+        ConsoleController.log(`Sugerencias:
+            Aceptadas: ${acceptedAmmount}
+            Rechazadas: ${rejectedAmmount}
+            Ignoradas: ${ignoredAmmount}`
+        , 'DEBUG');
+
+        this.isClicked = false;
+    }
 }
