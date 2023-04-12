@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Prueba de la Arquitectura</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='styles/index.css'>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div id="simulation-menu"></div>
+    <div id="simulation-console">
+        <div class="level-select-container">
+            <label for="level-select">Nivel de Registro:</label>
+            <select id="level-select" name="level-select">
+                <option value="DEBUG">Debug</option>
+                <option value="INFO">Info</option>
+                <option value="WARNING">Warning</option>
+                <option value="ERROR">Error</option>
+            </select>
+        </div>
+        <div class="messages-container-anchor">
+            <div id="messages-container-wrapper">
+                <div id="messages-container"></div>
+            </div>
+        </div>
+    </div>
+    <div id="suggestions-box"></div>
+    <script src="scripts/main.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+    display: flex;
+}
+
+body {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: 30px 120px 1fr;
+    grid-template-areas: 
+        'menu         menu'
+        'simulation   suggestions'
+        'simulation   console'
+}
+
+#canvas-container {
+    grid-area: simulation;
+
+    background-color: #efefef;
+    border-right: 1px solid black;
+}
+
+#simulation-menu {
+    grid-area: menu;
+
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+
+    align-items: end;
+    padding-left: 20px;
+}
+
+.main_menu {
+    padding: 10px 8px 2px 8px;
+    user-select: none;
+}
+
+.submenu_container__wrapper {
+    position: relative;
+    display: block;
+}
+
+.menu_button:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+
+    cursor: pointer;
+}
+
+.submenu_container {
+    display: grid;
+    grid-template-columns: max-content;
+
+    visibility: hidden;
+    position: absolute;
+
+    top: calc(100% + 2px);
+
+    padding: 5px;
+    background-color: white;
+    border: 1px solid black;
+    border-top: none;
+}
+
+.menu_action {
+    cursor: pointer;
+}
+
+.menu_action:hover {
+    text-decoration: underline;
+}
+
+#simulation-console {
+    grid-area: console;
+
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+        'level-select'
+        'messages';
+}
+
+.level-select-container {
+    padding: 5px;
+    grid-area: 'level-select';
+    
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#level-select {
+    margin-left: 10px;
+    padding: 3px 3px 3px 5px;
+}
+
+.messages-container-anchor {
+    grid-area: 'messages';
+    position: relative;
+}
+
+#messages-container-wrapper {
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    left: 0;
+    right: 0;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+}
+
+#messages-container {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+}
+
+#messages-container>.no-messages {
+    color: gray;
+
+    flex: 1;
+    display: grid;
+    place-content: center;
+
+    padding: 15px;
+    text-align: center;
+}
+
+#messages-container>.console-message {
+    padding: 5px 10px;
+    border-top:  1px solid black;
+
+    font-size: 0.85rem;
+}
+
+#messages-container > .console-message.debug {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#messages-container > .console-message.info {
+    color: black
+}
+
+#messages-container > .console-message.warning {
+    color: #FFA726
+}
+
+#messages-container > .console-message.error {
+    color: #F44336
+}
+
+#messages-container>.console-message:last-child {
+    padding-bottom: 25px;
+}
+
+#suggestions-box {
+    grid-area: suggestions;
+    border-bottom: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.suggestion-description {
+    flex: 1;
+    padding: 5px 10px;
+
+    display: grid;
+    place-content: center;
+
+    text-align: center;
+}
+
+.suggestion-description.message-only {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.suggestion-actions {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+}
+
+.suggestion-button {
+    padding: 2px 4px;
+    margin: 5px;
+}
