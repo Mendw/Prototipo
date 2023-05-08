@@ -20,8 +20,10 @@ export default class SuggestionController extends BaseComponent<SuggestionContro
         return { lastSuggestion: null };
     }
 
-    suggestAction(message: Message) {
+    async suggestAction(message: Message) {
         const suggestion = message.content.payload as SuggestionMessage;
+        
+        await this.addProcess(300, 600);
         SuggestionInterface.suggestAction(suggestion);
 
         this.setState({ lastSuggestion: suggestion }, false);
@@ -39,11 +41,11 @@ export default class SuggestionController extends BaseComponent<SuggestionContro
         this.sendMessage('IntelligentAgent', { action: 'suggestionRespond', payload });
     }
 
-    async acceptSuggestion() {
+    acceptSuggestion() {
         this.suggestionRespond(true);
     }
 
-    async rejectSuggestion() {
+    rejectSuggestion() {
         this.suggestionRespond(false);
     }
 

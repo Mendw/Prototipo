@@ -1,5 +1,13 @@
 import SimulationController from './SimulationController.js';
 
+
+const LOG_LEVEL_NAMES = {
+    'DEBUG': 'DEPURACIÓN',
+    'INFO': 'INFORMACIÓN',
+    'WARNING': 'ADVERTENCIA',
+    'ERROR': 'ERROR'
+}
+
 const LOG_LEVELS = {
     'DEBUG': 0,
     'INFO': 1,
@@ -57,7 +65,7 @@ export default class ConsoleController {
 
     renderEmptyMessage() {
         const consoleMessage = document.createElement('div');
-        consoleMessage.innerText = this.messages.length === 0 ? 'Aún no hay mensajes en la consola' : `Aun no hay mensajes del nivel ${this.level} o superior`;
+        consoleMessage.innerText = this.messages.length === 0 ? 'Aún no hay mensajes en la consola' : `Aun no hay mensajes del nivel ${LOG_LEVEL_NAMES[this.level]} o superior`;
         consoleMessage.classList.add('no-messages');
 
         this.messagesContainer.appendChild(consoleMessage);
